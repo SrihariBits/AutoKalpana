@@ -5,7 +5,7 @@ Plan
 + Partition that into parts of 32 or 64 consecutive characters
 + Segment each of the parts based on knowledge based rules and also count number of occurances of each subsegment
 + Assign priority to segments based on these values
-+ Consider internal patterns as a complete<br>
++ Consider internal patterns as a complete subsegment<br>
 (Optional steps here)<br>
 + Make a document segment matrix
 + Pass through topic modelling with LDA and group segments per topic<br>
