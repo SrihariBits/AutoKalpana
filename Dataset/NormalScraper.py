@@ -2,7 +2,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 import os
-path = "http://www.shivkumar.org/music/himadrisuthe.htm"
+path = "http://www.shivkumar.org/music/sive-pahimam.htm"
 page = requests.get(path)
 soup = BeautifulSoup(page.content, 'html.parser')
 lines = soup.find_all('p', class_='MsoNormal')
@@ -11,15 +11,7 @@ dictionary = ['S', 'R', 'G', 'M', 'P', 'D', 'N',
 swara_content = ""
 cnt = 0
 for line in lines:
-    while line.find('span', style='mso-spacerun:yes') != None:
-        tagged = line.find('span', style='mso-spacerun:yes')
-        tagged.replace_with(' ')
-    while line.find('b') != None:
-        tag = line.b
-        temp = str(tag.get_text()).lower()
-        tag.replace_with(temp)
     text = str(line.get_text())
-    text = text.swapcase()
     text = " ".join(text.split())
     text = re.sub('-', ' ', text)
     text = re.sub(';', ',', text)
