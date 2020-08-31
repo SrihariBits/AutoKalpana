@@ -1,0 +1,6 @@
+S,SS,S,ndn,dpd,,pmp,g,m,p,dn
+n,nn,n,ndpd,nS
+d,dd,ddnp,pppdm
+pdnSn,dpmpSn,dpm
+nRnRndm,mdmdmgr,
+ndmgr,dmgrs,

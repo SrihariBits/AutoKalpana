@@ -1,0 +1,9 @@
+nS,dnS,dndpmp,dnp,d
+nRndpmggndpmpg,m,pdnp,d
+SS,nS,dnS,pdnS,m,pdn,p,d
+S,SGRSnd,GRn,dRndpmpdRnp,d
+ndmgrdmgrmg,rgmpdnGRp,d
+pg,rdpg,rndpg,rgmpdnp,d
+S,SnSnRSndSndpgmpdnSRSGRSnSRnSdnSndpm
+SndpmdpmgmpdnSRSGRSndGR,G,SGRRSnSndmpdn
+SnRSGRSnSGRnRndndmdmgmgdgmgngmmpnSGRSnp,m

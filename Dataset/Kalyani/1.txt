@@ -1,0 +1,13 @@
+Sndpm,g,r
+nSdnSndpm,pmgmr
+S,Sndpmpmgmrg
+nnS,SSnSRRSn,,,SRGGRSndGRSnRSndnSndpm,ndpmgm
+p,pmpdnS,Snndpmp,dmdnsgrsn,snsndpm,,
+GRS,RSn,Snd,ndp,gmp
+gmp,,mpd,,dnd,,
+g,mpdnSndpmpdnSRGR,SndGRSndNRSndnsndpm
+s,,sndpmpdnsGRSN,
+nSRSndpmgmpdn,,SRGRSndpmpdnSRGRSndpmgmpdnS
+nSndpmgmpdnS,GRSndn,RSndpd,Sndpmp,ndpdnS,GRSnd,RSndp,
+S,Sndpmgr,gmpdnS,d,nSRGRSn,SRSndpd,P,dnSGRSn,D,nSRGMGR
+n,GRSnSGRS,GRSnSRSndn
