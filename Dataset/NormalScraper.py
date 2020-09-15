@@ -2,7 +2,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 import os
-path = "http://www.shivkumar.org/music/vishalakshim.htm"
+path = "http://www.shivkumar.org/music/ravehimagiri.htm"
 page = requests.get(path)
 soup = BeautifulSoup(page.content, 'html.parser')
 lines = soup.find_all('p', class_='MsoNormal')
@@ -25,6 +25,7 @@ for line in lines:
     text = text.replace("\u2026", " ")
     text = text.replace("\u00AD", "")
     text = text.replace("\u2013", "")
+    text = text.replace("\u002D", "")
     #text = re.sub('\|', '', text)
     flag = False
     # print(text.encode())
@@ -39,7 +40,7 @@ for line in lines:
 print(swara_content)
 file_name = path.rsplit('/', 1)[-1]
 file_name = file_name[:-4]
-dir_name = "./Panthuvarali/"
+dir_name = "./Thodi/"
 if file_name+".txt" not in os.listdir(dir_name):
     with open(dir_name + file_name + ".txt", 'w', encoding='utf-8') as f:
         f.write(swara_content)

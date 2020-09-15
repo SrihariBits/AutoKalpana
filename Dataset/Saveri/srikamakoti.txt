@@ -1,0 +1,15 @@
+dpMP,dSNDPMPdnDMGRR|S,,,,,RMM,,DPMPD||
+dpMP,dSNDPMpdndddpmGRR|S,,,,,RMM,,DPMPD||
+dpMP,dSNDPMpdrsndpmGRR|S,,,,,RMM,,DPMPD||
+DMPdnDMGRSNDNSRmpdp|D,,,PD,sSsnDpdndpmDPD||
+DMPdnDMGRSNDNSRmpdp|D,,,PR,sSsnDpdndpmDPD||
+S,ND,PPdnDMGR,SMP|D,,,,,,PMdpDDS,,,||
+S,ND,Ppdrsndpmddpmgrsrmpdp|D,,,,,,PMdpDDS,,,||
+DPDS,,srGRRS,NDMdr|rsS,,,,,,,,,,,,,,||
+DPDS,,srGRRS,NDMdr|rsS,,DRSsnDdrsR,DMPD||
+DPDS,,srpmMGRRSrgrsNDMdgR|rsS,,DRSsnDdrsR,DMPD||
+D,P,MGRMPD,,,,,dpM|,dmP,,,,,,,,,,,,,||
+D,P,MGRMPD,,,,,dpM|,dmP,,,,,,,,,mpDdpM||
+D,P,MGRMPD,,,,,dpM|,dmP,,,,,srMrmPmpDdpM||
+D,P,MGR,mpD,,,,,Pdm|PD,SNDMDS,,drsnDPM||
+DG,RGRSsrsnD,mDmdS,S|NDdrsnDdrsnDDPPndDPMPD||

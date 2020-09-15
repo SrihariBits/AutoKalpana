@@ -1,0 +1,15 @@
+p,,,p,pmg,m,p,,,,,,,,,dn
+Snd,p,pmg,m,p,,,,,p,d,n,
+snndp,p,dpmg,mp,,,,,,,pdR,
+Snndp,p,dp,mgrsmgr,snd,mgr,
+Snndp,p,dpmg,mpmpd,p,,,,,,
+pmg,m,p,d,p,pmp,d,nS,,,
+p,dpmg,m,p,d,pm,d,n,RSSn,d
+pdndpmg,m,p,d,p,m,p,d,n,S,d,
+G,R,S,S,p,d,R,S,SnndpdR,
+pdndpmg,m,p,d,p,m,d,n,S,R,R,
+pmg,r,s,s,nd,grssndsnpd,R
+pp,pmgmrgmpdnRndpdmggmr
+ggndmndmgrsrggmrgmpmpd,p
+d,S,ndn,ddgrg,mrgrsnpd,n
+d,ggrssndpdnnRnRndpmpdgr

@@ -1,0 +1,17 @@
+M,G,|M,P,||,,,|,,DN||S,,|snD,mP||sndppm|mgSsrgm||
+M,dpmG,|M,P,||,,,|,,DN||S,,r|snD,mP||sndppm|mgSsrgm||
+mpdpMG,|MdpMP||,,,|,,mpdn||S,,r|snD,mP||sndppm|mgSsrgm||
+mpdpMG,|M,dpM||P,,|,,mpdn||S,rg|rsnd,,mP||sndppm|mgSsrgm||
+mpdpMG,|M,PD,n||drsnDP|,,mpdn||S,rg|rsnd,,mP||sndppm|mgSsrgm||
+mpdpMG,|M,PD,n||drsnDP|,,mpdn||S,gr|sndp,mP||sndppmG|mgSsrgm||
+mpdPdpmG,|M,Pdn||dnSnDp|,,DN||S,rgmgr|sndp,mP||sndppmG|mgSsrgm||
+MdpM,G,|M,dpM||P,,|,,,,||
+SP,|dpmgMP||,D,n|S,,Sn||SrgrsS|SSNdr||sSndn|SdrsnDP||
+Mdpmg,|M,PP||D,N|S,,Sn||SrgrsS|SSNS||S,dN|dnS,nDP||
+pSndP,,|dpmgMP||D,N|S,,Sn||SrgrsS|SSNS||S,dN|dnS,nDP||
+pSndP,,|dpmgMP||mpdnSrsS|S,,Sn||srgmG|rS,SNS||S,dN|dnSsndp,||
+dnsndP,,|dpmgMP||mpdnSrsS|S,,Sn||srgmG|rS,SNS||S,dN|SdrsnDP||
+dnsndP,,|dpmgMP||mpdnSrsS|S,,Sn||srgmG|rS,SNS||S,dN|S,,,||
+MPN|DPPpm||pmdpM|G,,,||gspmrg|rSrGM||dpmgM|P,,,||
+MPN|DPPpm||MdpM|G,,,||gspmrg|rSrGM||dpmgM|P,,,||
+GSS|NDPpm||mpDmP,M|G,,,||gspmrg|rSrGM||dpmgM|dpmp,,||

@@ -1,0 +1,12 @@
+,,pM|G,Rsr||M,M,|P,P,||,,pD|P,P,||P,dpm|mpdpD,||
+,,pdpM|G,Rsr||M,M,|P,P,||,,pD|P,P,||P,dpm|mpdpD,||
+,,pD|S,,R||S,Sr|snDD,||,,mP|dNpD,||P,dpm|G,rR,||
+,,sddpM|G,Rsr||M,M,|P,P,||,,pD|P,P,||P,dpm|mpdpD,||
+,MD|S,,R||S,Sr|snDD,||mprsR|mpdn,pD||mPdpm|G,rR,||
+,,sddpM|G,Rsr||M,M,|,,P,||
+,,mD|S,,R||S,Sr|snDD,||,,mP|dNpD,||mPdpm|G,rR,||
+,,mD|S,,R||S,Sr|snDD,||mprsR|mpdn,pD||mPdpm|G,rR,||
+,,pD|P,,dpM||G,,r|SrsR,||,,sR|G,rR,||S,rsn|DgrrsS||
+,,pD|P,,dpM||G,,r|SrsR,||,,srpm|G,rR,||S,rsn|DgrrsS||
+,,pD|S,R,||S,Sr|snDD,||,,mP|dNpD,||mPdpm|G,rR,||
+,,pD|S,R,||S,nsrSr|snDD,||mprsR|mpdn,pD||mPdpm|G,rR,||
