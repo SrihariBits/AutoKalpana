@@ -5,8 +5,8 @@ import numpy as np
 
 ##########TODO###########
 # compress commas (Y)   #
-# other 5 yatis         #
-# tala patterns         #
+# Yatis  (Y)            #
+# tala patterns  (Y)    #
 # partition algorithm   #
 # combo->const-inc patt #
 #########################
@@ -47,7 +47,8 @@ def findIncPatterns(inputList, raga='mohanam'):
                     if i+2*(size+expand)+1 >= len(inputList):
                         break
             if cnt > 1:
-                print(diff, cnt)
+                # (Initial diff, number of increments in len, type)
+                print(diff, cnt, 1)
             i += 1
             expand = 0
 
@@ -72,8 +73,64 @@ def findConstPatterns(inputList, raga='mohanam'):
                 currdiff = [distanceMatrix[subpartB[x]][subpartA[x]]
                             for x in range(len(subpartA))]
             if cnt > 1:
-                print(diff, cnt)
+                # (fixed diff, number of such patterns, type)
+                print(diff, cnt, 2)
             i += 1
+
+
+def rhythmPatternHelper(s):
+    # Tha Tha Kita Thi Thi Kita
+    if s[0] == s[1] and s[4] == s[5]:
+        return True
+
+    # Tha Tha Tha Tha Ki Ta Tha Ka
+    elif s[0] == s[1] == s[2] == s[3]:
+        return True
+
+    # Tha Tha Ki Ta Ki Ta Tha Ka
+    elif s[0] == s[1] and s[2] == s[4] and s[3] == s[5]:
+        return True
+
+    # Tha Ka Tha Ri Ki Ta Tha Ka
+    elif s[0] == s[2] and s[1] != s[3]:
+        return True
+
+    # Tha Ka Thi Mi Tha Ka Ju Nu
+    elif s[0] == s[4] and s[1] == s[5]:
+        return True
+
+    # Tha Din Din Ki Ki Tha Tha Thom
+    elif s[1] == s[2] and s[3] == s[4] and s[5] == s[6]:
+        return True
+
+    # Tha Tha Ka Tha Thi Ki Na Thom
+    elif s[0] == s[1] == s[3] and s[0] != s[2]:
+        return True
+
+    # Tha Ki Ta Tha Ka Tha Ki Ta
+    elif s[0] == s[5] and s[1] == s[6] and s[2] == s[7]:
+        return True
+
+    # Tha Ki Ta Tha Ki Ta Tha Ka
+    elif s[0] == s[3] and s[1] == s[4] and s[2] == s[5]:
+        return True
+
+    else:
+        return False
+
+
+# Internal pattern with respect to rhythms (table/mridangam)
+def findRhythmPatterns(inputList, raga='mohanam'):
+    distanceMatrix = constructRagaGraph(raga)
+    size = 8
+    i = 0
+    while i < len(inputList)-size:
+        subpart = inputList[i:i+size]
+        diff = [distanceMatrix[subpart[x-1]][subpart[x]]
+                for x in range(1, len(subpart), 1)]
+        if rhythmPatternHelper(subpart):
+            print(diff, 0, 3)
+        i += 1
 
 
 if __name__ == "__main__":
@@ -85,4 +142,5 @@ if __name__ == "__main__":
     arr = toNpArray(inputString)
     #findConstPatterns(arr, 'mohanam')
     findIncPatterns(arr, 'mohanam')
+    findRhythmPatterns(arr, 'mohanam')
     print("\n***** PROGRAM ENDED *****")
