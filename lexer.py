@@ -4,7 +4,7 @@ from ToNpArray import toNpArray
 import numpy as np
 
 ##########TODO###########
-# compress commas       #
+# compress commas (Y)   #
 # other 5 yatis         #
 # tala patterns         #
 # partition algorithm   #
@@ -12,6 +12,21 @@ import numpy as np
 #########################
 
 
+# replace commas with previous character
+def compressCommas(inputString, raga='mohanam'):
+    inputList = list(inputString)
+    for i in range(len(inputList)):
+        if(i == 0 and inputList[i] == ','):
+            inputList[i] = 'S'
+        elif(inputList[i] == ','):
+            inputList[i] = inputList[i-1]
+    outputString = ""
+    return outputString.join(inputList)
+
+
+# Gopuchha and Strotovaha Yati - starts from all positions in string, with fixed 2-6
+# initial pattern string having fixed internal difference, also increasing
+# in length in further patterns
 def findIncPatterns(inputList, raga='mohanam'):
     distanceMatrix = constructRagaGraph(raga)
     for size in range(2, 6, 1):
@@ -25,7 +40,7 @@ def findIncPatterns(inputList, raga='mohanam'):
             diff = np.array(diff)
             diff.astype(int)
             if np.min(diff) == np.max(diff) and i+2*(size+expand)+1 < len(inputList):
-                while np.all(inputList[i+size+expand:i+2*(size+expand)] == inputList[i:i+size+expand]) and distanceMatrix[inputList[i+2*(size+expand)]][inputList[i+2*(size+expand)+1]] == 1:
+                while np.all(inputList[i+size+expand:i+2*(size+expand)] == inputList[i:i+size+expand]) and distanceMatrix[inputList[i+2*(size+expand)]][inputList[i+2*(size+expand)+1]] == diff[0]:
                     cnt += 1
                     i = i + size + expand
                     expand += 1
@@ -37,6 +52,7 @@ def findIncPatterns(inputList, raga='mohanam'):
             expand = 0
 
 
+# Current pattern and next pattern have same CORRESPONDING difference (automatic internal pattern)
 def findConstPatterns(inputList, raga='mohanam'):
     distanceMatrix = constructRagaGraph(raga)
     for size in range(20, 1, -1):
@@ -62,7 +78,10 @@ def findConstPatterns(inputList, raga='mohanam'):
 
 if __name__ == "__main__":
     print("***** PROGRAM STARTED *****\n")
-    inputString = "ggppppdpSSSSRSddppdpggrrgpdSdddpggrrggdpggpggrssggggrgpgppppggdpdddpSSSSdGRRSSSdSdddpgpdSdpdpggrssrgggggrpgrrsrsgrsggppppdpSSSS"
+    #inputString = "ggp,p,dpS,S,RSd,d,p,d,pg,g,r,gpdSd,,pg,rrggdpg,pggrs,ggggrgpgp,p,ggdpd,dpS,S,dGRRS,SdSdddpgpdSdpdpggrssrg,g,grpgrrsrsgrsggp,p,dpS,S,"
+    inputString = "ssrsrgsrgpsrgpdsrgpds"
+    inputString = compressCommas(inputString, 'mohanam')
+    print(inputString)
     arr = toNpArray(inputString)
     #findConstPatterns(arr, 'mohanam')
     findIncPatterns(arr, 'mohanam')
