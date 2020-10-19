@@ -1,6 +1,7 @@
 from Probabilistic_Approach import constructRagaGraph
 from Probabilistic_Approach import constructGrams
 from ToNpArray import toNpArray
+from helpers import rhythmPatternHelper
 import numpy as np
 
 ##########TODO###########
@@ -56,7 +57,7 @@ def findIncPatterns(inputList, raga='mohanam'):
 # Current pattern and next pattern have same CORRESPONDING difference (automatic internal pattern)
 def findConstPatterns(inputList, raga='mohanam'):
     distanceMatrix = constructRagaGraph(raga)
-    for size in range(20, 1, -1):
+    for size in range(20, 3, -1):
         i = 0
         while i < len(inputList)-2*size:
             subpartA = inputList[i+size:i+2*size]
@@ -78,47 +79,6 @@ def findConstPatterns(inputList, raga='mohanam'):
             i += 1
 
 
-def rhythmPatternHelper(s):
-    # Tha Tha Kita Thi Thi Kita
-    if s[0] == s[1] and s[4] == s[5]:
-        return True
-
-    # Tha Tha Tha Tha Ki Ta Tha Ka
-    elif s[0] == s[1] == s[2] == s[3]:
-        return True
-
-    # Tha Tha Ki Ta Ki Ta Tha Ka
-    elif s[0] == s[1] and s[2] == s[4] and s[3] == s[5]:
-        return True
-
-    # Tha Ka Tha Ri Ki Ta Tha Ka
-    elif s[0] == s[2] and s[1] != s[3]:
-        return True
-
-    # Tha Ka Thi Mi Tha Ka Ju Nu
-    elif s[0] == s[4] and s[1] == s[5]:
-        return True
-
-    # Tha Din Din Ki Ki Tha Tha Thom
-    elif s[1] == s[2] and s[3] == s[4] and s[5] == s[6]:
-        return True
-
-    # Tha Tha Ka Tha Thi Ki Na Thom
-    elif s[0] == s[1] == s[3] and s[0] != s[2]:
-        return True
-
-    # Tha Ki Ta Tha Ka Tha Ki Ta
-    elif s[0] == s[5] and s[1] == s[6] and s[2] == s[7]:
-        return True
-
-    # Tha Ki Ta Tha Ki Ta Tha Ka
-    elif s[0] == s[3] and s[1] == s[4] and s[2] == s[5]:
-        return True
-
-    else:
-        return False
-
-
 # Internal pattern with respect to rhythms (table/mridangam)
 def findRhythmPatterns(inputList, raga='mohanam'):
     distanceMatrix = constructRagaGraph(raga)
@@ -135,8 +95,8 @@ def findRhythmPatterns(inputList, raga='mohanam'):
 
 if __name__ == "__main__":
     print("***** PROGRAM STARTED *****\n")
-    #inputString = "ggp,p,dpS,S,RSd,d,p,d,pg,g,r,gpdSd,,pg,rrggdpg,pggrs,ggggrgpgp,p,ggdpd,dpS,S,dGRRS,SdSdddpgpdSdpdpggrssrg,g,grpgrrsrsgrsggp,p,dpS,S,"
-    inputString = "ssrsrgsrgpsrgpdsrgpds"
+    inputString = "ggp,p,dpS,S,RSd,d,p,d,pg,g,r,gpdSd,,pg,rrggdpg,pggrs,ggggrgpgp,p,ggdpd,dpS,S,dGRRS,SdSdddpgpdSdpdpggrssrg,g,grpgrrsrsgrsggp,p,dpS,S,"
+    #inputString = "ssrsrgsrgpsrgpdsrgpds"
     inputString = compressCommas(inputString, 'mohanam')
     print(inputString)
     arr = toNpArray(inputString)
