@@ -1,3 +1,4 @@
+from collections import deque
 from Probabilistic_Approach import constructRagaGraph
 from Probabilistic_Approach import constructGrams
 from ToNpArray import toNpArray
@@ -86,7 +87,12 @@ def findIncPatterns(inputList, raga='mohanam'):
         if found:
             if newlist:
                 retlist.append(newlist)
+            newlist = list(inputList[i:])
+            if newlist:
+                retlist.append(newlist)
             return retlist
+    if not retlist:
+        return [inputList]
     return retlist
 
 
@@ -140,7 +146,12 @@ def findDecPatterns(inputList, raga='mohanam'):
         if found:
             if newlist:
                 retlist.append(newlist)
+            newlist = list(inputList[i:])
+            if newlist:
+                retlist.append(newlist)
             return retlist
+    if not retlist:
+        return [inputList]
     return retlist
 
 
@@ -191,26 +202,51 @@ def findConstPatterns(inputList, raga='mohanam'):
         if found:
             if newlist:
                 retlist.append(newlist)
+            newlist = list(inputList[i:])
+            if newlist:
+                retlist.append(newlist)
             return retlist
+    if not retlist:
+        return [inputList]
     return retlist
 
 
 # Internal pattern with respect to rhythms (tabla/mridangam)
 def findRhythmPatterns(inputList, raga='mohanam'):
     distanceMatrix = constructRagaGraph(raga)
+    retlist = []
+    newlist = []
     size = 8
     i = 0
     while i < len(inputList)-size:
         subpart = inputList[i: i+size]
-        diff = [distanceMatrix[subpart[x-1]][subpart[x]]
-                for x in range(1, len(subpart), 1)]
+        #diff = [distanceMatrix[subpart[x-1]][subpart[x]] for x in range(1, len(subpart), 1)]
         if rhythmPatternHelper(subpart):
-            print(diff, 0, 3)
+            if newlist:
+                retlist.append(newlist)
+            newlist = list(inputList[i:i+8])
+            newlist.append(-1)
+            newlist.insert(0, -1)
+            retlist.append(newlist)
+            newlist = []
+            i += 8
+            continue
+            #print(diff, 0, 3)
+        newlist.append(inputList[i])
         i += 1
+    newlist = list(inputList[i:])
+    if newlist:
+        retlist.append(newlist)
+    if not retlist:
+        return [inputList]
+    return retlist
 
 
 # Patterns formed as a partition of number (5,6,7 or 8 for now)
 def findPartitionPatterns(inputList, raga='mohanam'):
+    retlist = []
+    newlist = []
+    p_found = False
     for n in range(8, 4, -1):
         distanceMatrix = constructRagaGraph(raga)
         p_list = partitionHelper(n)
@@ -218,25 +254,46 @@ def findPartitionPatterns(inputList, raga='mohanam'):
         sol = []
         while i < len(inputList)-n:
             subpart = inputList[i: i+n]
-            found = True
             last = 0
-            for parts in p_list:
-                for part in parts:
-                    subsubpart = subpart[last: last+part]
+            pat_found = False
+            for partitions in p_list:
+                found = True
+                for partition in partitions:
+                    subsubpart = subpart[last: last+partition]
                     diff = [distanceMatrix[subsubpart[x-1]][subsubpart[x]]
                             for x in range(1, len(subsubpart), 1)]
                     if np.min(diff) >= -1 and np.max(diff) <= 1:
-                        last += part
+                        last += partition
                     else:
                         found = False
+                        last = 0
                         break
                 if found:
-                    sol.append([distanceMatrix[subpart[x-1]][subpart[x]]
-                                for x in range(1, len(subpart), 1)])
+                    if newlist:
+                        retlist.append(newlist)
+                    newlist = list(inputList[i:i+n])
+                    newlist.append(-1)
+                    newlist.insert(0, -1)
+                    retlist.append(newlist)
+                    newlist = []
                     i += n
+                    p_found = True
+                    pat_found = True
                     break
-            if not found:
-                i += 1
+            if p_found and i >= len(inputList)-n:
+                if newlist:
+                    retlist.append(newlist)
+                newlist = list(inputList[i:])
+                if newlist:
+                    retlist.append(newlist)
+                return retlist
+            if pat_found:
+                continue
+            newlist.append(inputList[i])
+            i += 1
+    if not retlist:
+        return [inputList]
+    return retlist
 
 
 if __name__ == "__main__":
@@ -244,10 +301,40 @@ if __name__ == "__main__":
     # inputString = "ggp,p,dpS,S,RSd,d,p,d,pg,g,r,gpdSd,,pg,rrggdpg,pggrs,ggggrgpgp,p,ggdpd,dpS,S,dGRRS,SdSdddpgpdSdpdpggrssrg,g,grpgrrsrsgrsggp,p,dpS,S,"
     inputString = "srgpdrgpdgpdpdSdpgrSdpgSdpSdsrgrgpgpdpdS"
     inputString = compressCommas(inputString, 'mohanam')
-    print(inputString)
     arr = toNpArray(inputString)
-    # findConstPatterns(arr, 'mohanam')
-    print(findIncPatterns(arr, 'mohanam'))
-    print(findConstPatterns(arr, 'mohanam'))
-    # findRhythmPatterns(arr, 'mohanam')
+    print(arr)
+    print()
+    print(inputString)
+    print()
+    #print(findIncPatterns(arr, 'mohanam'))
+    #print(findDecPatterns(arr, 'mohanam'))
+    #print(findConstPatterns(arr, 'mohanam'))
+    #print(findRhythmPatterns(arr, 'mohanam'))
+    #print(findPartitionPatterns(arr, 'mohanam'))
+    # print()
+    stack = deque()
+    stack.append(arr)
+    result = []
+    while stack:
+        top = stack.pop()
+        if top[0] == -1:
+            result.append(top)
+        else:
+            ret_list = findIncPatterns(top, 'mohanam')
+            if len(ret_list) == 1:
+                ret_list = findDecPatterns(top, 'mohanam')
+                if len(ret_list) == 1:
+                    ret_list = findConstPatterns(top, 'mohanam')
+                    if len(ret_list) == 1:
+                        ret_list = findRhythmPatterns(top, 'mohanam')
+                        if len(ret_list) == 1:
+                            ret_list = findPartitionPatterns(top, 'mohanam')
+                            if len(ret_list) == 1:
+                                top.append(-1)
+                                top.insert(0, -1)
+                                ret_list = [top]
+            ret_list.reverse()
+            for l in ret_list:
+                stack.append(l)
+    print(result)
     print("\n***** PROGRAM ENDED *****")
