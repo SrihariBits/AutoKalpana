@@ -1,65 +1,62 @@
-# Load LSTM network and generate text
-import sys
-import numpy
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-from keras.layers import LSTM
-from keras.callbacks import ModelCheckpoint
-from keras.utils import np_utils
-# load ascii text and covert to lowercase
-filename = "wonderland.txt"
-raw_text = open(filename, 'r', encoding='utf-8').read()
-raw_text = raw_text.lower()
-# create mapping of unique chars to integers, and a reverse mapping
-chars = sorted(list(set(raw_text)))
-char_to_int = dict((c, i) for i, c in enumerate(chars))
-int_to_char = dict((i, c) for i, c in enumerate(chars))
-# summarize the loaded data
-n_chars = len(raw_text)
-n_vocab = len(chars)
-print("Total Characters: ", n_chars)
-print("Total Vocab: ", n_vocab)
-# prepare the dataset of input to output pairs encoded as integers
-seq_length = 100
-dataX = []
-dataY = []
-for i in range(0, n_chars - seq_length, 1):
-    seq_in = raw_text[i:i + seq_length]
-    seq_out = raw_text[i + seq_length]
-    dataX.append([char_to_int[char] for char in seq_in])
-    dataY.append(char_to_int[seq_out])
-n_patterns = len(dataX)
-print("Total Patterns: ", n_patterns)
-# reshape X to be [samples, time steps, features]
-X = numpy.reshape(dataX, (n_patterns, seq_length, 1))
-# normalize
-X = X / float(n_vocab)
-# one hot encode the output variable
-y = np_utils.to_categorical(dataY)
-# define the LSTM model
-model = Sequential()
-model.add(LSTM(256, input_shape=(X.shape[1], X.shape[2])))
-model.add(Dropout(0.2))
-model.add(Dense(y.shape[1], activation='softmax'))
-# load the network weights
-filename = "weights-improvement-20-1.9375.hdf5"
-model.load_weights(filename)
-model.compile(loss='categorical_crossentropy', optimizer='adam')
-# pick a random seed
-start = numpy.random.randint(0, len(dataX)-1)
-pattern = dataX[start]
-print("Seed:")
-print("\"", ''.join([int_to_char[value] for value in pattern]), "\"")
-# generate characters
-for i in range(1000):
-    x = numpy.reshape(pattern, (1, len(pattern), 1))
-    x = x / float(n_vocab)
-    prediction = model.predict(x, verbose=0)
-    index = numpy.argmax(prediction)
-    result = int_to_char[index]
-    seq_in = [int_to_char[value] for value in pattern]
-    sys.stdout.write(result)
-    pattern.append(index)
-    pattern = pattern[1:len(pattern)]
-print("\nDone.")
+from random import randint
+from pickle import load
+from keras.models import load_model
+from keras.preprocessing.sequence import pad_sequences
+
+# load doc into memory
+
+
+def load_doc(filename):
+    # open the file as read only
+    file = open(filename, 'r')
+    # read all text
+    text = file.read()
+    # close the file
+    file.close()
+    return text
+
+# generate a sequence from a language model
+
+
+def generate_seq(model, tokenizer, seq_length, seed_text, n_words):
+    result = list()
+    in_text = seed_text
+    # generate a fixed number of words
+    for _ in range(n_words):
+        # encode the text as integer
+        encoded = tokenizer.texts_to_sequences([in_text])[0]
+        # truncate sequences to a fixed length
+        encoded = pad_sequences([encoded], maxlen=seq_length, truncating='pre')
+        # predict probabilities for each word
+        yhat = model.predict_classes(encoded, verbose=0)
+        # map predicted word index to word
+        out_word = ''
+        for word, index in tokenizer.word_index.items():
+            if index == yhat:
+                out_word = word
+                break
+        # append to input
+        in_text += ' ' + out_word
+        result.append(out_word)
+    return ' '.join(result)
+
+
+# load cleaned text sequences
+in_filename = 'republic_sequences.txt'
+doc = load_doc(in_filename)
+lines = doc.split('\n')
+seq_length = len(lines[0].split()) - 1
+
+# load the model
+model = load_model('model.h5')
+
+# load the tokenizer
+tokenizer = load(open('tokenizer.pkl', 'rb'))
+
+# select a seed text
+seed_text = lines[randint(0, len(lines))]
+print(seed_text + '\n')
+
+# generate new text
+generated = generate_seq(model, tokenizer, seq_length, seed_text, 50)
+print(generated)
