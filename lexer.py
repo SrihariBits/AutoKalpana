@@ -1,6 +1,5 @@
 from collections import deque
 from Probabilistic_Approach import constructRagaGraph
-from Probabilistic_Approach import constructGrams
 from ToNpArray import toNpArray
 from helpers import rhythmPatternHelper, partitionHelper
 import numpy as np
@@ -26,7 +25,7 @@ def Compare(list1, list2):
 # replace commas with previous character
 
 
-def compressCommas(inputString, raga='mohanam'):
+def compressCommas(inputString, raga):
     inputList = list(inputString)
     for i in range(len(inputList)):
         if(i == 0 and inputList[i] == ','):
@@ -40,7 +39,7 @@ def compressCommas(inputString, raga='mohanam'):
 # Gopuchha and Strotovaha Yati - starts from all positions in string, with fixed 2-6
 # initial pattern string having fixed internal difference, also increasing
 # in length in further patterns
-def findIncPatterns(inputList, raga='mohanam'):
+def findIncPatterns(inputList, raga):
     distanceMatrix = constructRagaGraph(raga)
     retlist = []
     newlist = []
@@ -51,14 +50,14 @@ def findIncPatterns(inputList, raga='mohanam'):
         expand = 0
         while i + size + expand < len(inputList):
             subpart = inputList[i:i+size+expand]
-            diff = [distanceMatrix[subpart[x-1]][subpart[x]]
+            diff = [distanceMatrix[subpart[x-1]-1][subpart[x]-1]
                     for x in range(1, len(subpart))]
             cnt = 0
             diff = np.array(diff)
             diff.astype(int)
             start = i
             if np.min(diff) == np.max(diff) and i+2*(size+expand)+1 < len(inputList):
-                while (Compare(inputList[i+size+expand:i+2*(size+expand)], inputList[i:i+size+expand]) and distanceMatrix[inputList[i+2*(size+expand)]-1][inputList[i+2*(size+expand)]] == diff[0]) or (Compare(inputList[i+size+expand+1:i+2*(size+expand)+1], inputList[i:i+size+expand]) and distanceMatrix[inputList[i+size+expand]][inputList[i+size+expand+1]] == diff[0]):
+                while (Compare(inputList[i+size+expand:i+2*(size+expand)], inputList[i:i+size+expand]) and distanceMatrix[inputList[i+2*(size+expand)-1]-1][inputList[i+2*(size+expand)]-1] == diff[0]) or (Compare(inputList[i+size+expand+1:i+2*(size+expand)+1], inputList[i:i+size+expand]) and distanceMatrix[inputList[i+size+expand]-1][inputList[i+size+expand+1]-1] == diff[0]):
                     cnt += 1
                     i = i + size + expand
                     expand += 1
@@ -99,7 +98,7 @@ def findIncPatterns(inputList, raga='mohanam'):
 # Gopuchha and Strotovaha Yati - starts from all positions in string, with fixed 6-2
 # initial pattern string having fixed internal difference, also decreasing
 # in length in further patterns
-def findDecPatterns(inputList, raga='mohanam'):
+def findDecPatterns(inputList, raga):  # inf loop?
     distanceMatrix = constructRagaGraph(raga)
     retlist = []
     newlist = []
@@ -110,7 +109,7 @@ def findDecPatterns(inputList, raga='mohanam'):
         newlist = []
         while i + size - expand < len(inputList):
             subpart = inputList[i:i+size-expand]
-            diff = [distanceMatrix[subpart[x-1]][subpart[x]]
+            diff = [distanceMatrix[subpart[x-1]-1][subpart[x]-1]
                     for x in range(1, len(subpart))]
             cnt = 0
             diff = np.array(diff)
@@ -121,7 +120,7 @@ def findDecPatterns(inputList, raga='mohanam'):
                     cnt += 1
                     i = i + size - expand
                     expand += 1
-                    if i+2*(size-expand)-1 >= len(inputList):
+                    if expand >= size or i+2*(size-expand)-1 >= len(inputList):
                         break
             if cnt > 0:
                 if newlist:
@@ -156,7 +155,7 @@ def findDecPatterns(inputList, raga='mohanam'):
 
 
 # Current pattern and next pattern have same CORRESPONDING difference (automatic internal pattern)
-def findConstPatterns(inputList, raga='mohanam'):
+def findConstPatterns(inputList, raga):
     distanceMatrix = constructRagaGraph(raga)
     retlist = []
     newlist = []
@@ -167,7 +166,7 @@ def findConstPatterns(inputList, raga='mohanam'):
         while i < len(inputList)-2*size:
             subpartA = inputList[i+size:i+2*size]
             subpartB = inputList[i:i+size]
-            diff = [distanceMatrix[subpartB[x]][subpartA[x]]
+            diff = [distanceMatrix[subpartB[x]-1][subpartA[x]-1]
                     for x in range(len(subpartA))]
             cnt = 0
             currdiff = diff
@@ -177,7 +176,7 @@ def findConstPatterns(inputList, raga='mohanam'):
                 i += size
                 subpartA = inputList[i+size: i+2*size]
                 subpartB = inputList[i: i+size]
-                currdiff = [distanceMatrix[subpartB[x]][subpartA[x]]
+                currdiff = [distanceMatrix[subpartB[x]-1][subpartA[x]-1]
                             for x in range(len(subpartA))]
             if cnt > 1:
                 if newlist:
@@ -212,7 +211,7 @@ def findConstPatterns(inputList, raga='mohanam'):
 
 
 # Internal pattern with respect to rhythms (tabla/mridangam)
-def findRhythmPatterns(inputList, raga='mohanam'):
+def findRhythmPatterns(inputList, raga):
     distanceMatrix = constructRagaGraph(raga)
     retlist = []
     newlist = []
@@ -220,7 +219,7 @@ def findRhythmPatterns(inputList, raga='mohanam'):
     i = 0
     while i < len(inputList)-size:
         subpart = inputList[i: i+size]
-        #diff = [distanceMatrix[subpart[x-1]][subpart[x]] for x in range(1, len(subpart), 1)]
+        #diff = [distanceMatrix[subpart[x-1]-1][subpart[x]-1] for x in range(1, len(subpart), 1)]
         if rhythmPatternHelper(subpart):
             if newlist:
                 retlist.append(newlist)
@@ -243,7 +242,7 @@ def findRhythmPatterns(inputList, raga='mohanam'):
 
 
 # Patterns formed as a partition of number (5,6,7 or 8 for now)
-def findPartitionPatterns(inputList, raga='mohanam'):
+def findPartitionPatterns(inputList, raga):
     retlist = []
     newlist = []
     p_found = False
@@ -260,7 +259,7 @@ def findPartitionPatterns(inputList, raga='mohanam'):
                 found = True
                 for partition in partitions:
                     subsubpart = subpart[last: last+partition]
-                    diff = [distanceMatrix[subsubpart[x-1]][subsubpart[x]]
+                    diff = [distanceMatrix[subsubpart[x-1]-1][subsubpart[x]-1]
                             for x in range(1, len(subsubpart), 1)]
                     if np.min(diff) >= -1 and np.max(diff) <= 1:
                         last += partition
@@ -296,21 +295,21 @@ def findPartitionPatterns(inputList, raga='mohanam'):
     return retlist
 
 
-if __name__ == "__main__":
+def lexer(inputString, raga):
+    '''
     print("***** PROGRAM STARTED *****\n")
-    # inputString = "ggp,p,dpS,S,RSd,d,p,d,pg,g,r,gpdSd,,pg,rrggdpg,pggrs,ggggrgpgp,p,ggdpd,dpS,S,dGRRS,SdSdddpgpdSdpdpggrssrg,g,grpgrrsrsgrsggp,p,dpS,S,"
+    inputString = "ggp,p,dpS,S,RSd,d,p,d,pg,g,r,gpdSd,,pg,rrggdpg,pggrs,ggggrgpgp,p,ggdpd,dpS,S,dGRRS,SdSdddpgpdSdpdpggrssrg,g,grpgrrsrsgrsggp,p,dpS,S,"
     inputString = "srgpdrgpdgpdpdSdpgrSdpgSdpSdsrgrgpgpdpdS"
-    inputString = compressCommas(inputString, 'mohanam')
-    arr = toNpArray(inputString)
+    '''
+    inputString = compressCommas(inputString, raga)
+    arr = toNpArray(inputString, raga)
+
+    '''
     print(arr)
     print()
     print(inputString)
     print()
-    #print(findIncPatterns(arr, 'mohanam'))
-    #print(findDecPatterns(arr, 'mohanam'))
-    #print(findConstPatterns(arr, 'mohanam'))
-    #print(findRhythmPatterns(arr, 'mohanam'))
-    #print(findPartitionPatterns(arr, 'mohanam'))
+    '''
     # print()
     stack = deque()
     stack.append(arr)
@@ -320,15 +319,15 @@ if __name__ == "__main__":
         if top[0] == -1:
             result.append(top)
         else:
-            ret_list = findIncPatterns(top, 'mohanam')
+            ret_list = findIncPatterns(top, raga)
             if len(ret_list) == 1:
-                ret_list = findDecPatterns(top, 'mohanam')
+                ret_list = findDecPatterns(top, raga)
                 if len(ret_list) == 1:
-                    ret_list = findConstPatterns(top, 'mohanam')
+                    ret_list = findConstPatterns(top, raga)
                     if len(ret_list) == 1:
-                        ret_list = findRhythmPatterns(top, 'mohanam')
+                        ret_list = findRhythmPatterns(top, raga)
                         if len(ret_list) == 1:
-                            ret_list = findPartitionPatterns(top, 'mohanam')
+                            ret_list = findPartitionPatterns(top, raga)
                             if len(ret_list) == 1:
                                 top.append(-1)
                                 top.insert(0, -1)
@@ -336,5 +335,13 @@ if __name__ == "__main__":
             ret_list.reverse()
             for l in ret_list:
                 stack.append(l)
-    print(result)
-    print("\n***** PROGRAM ENDED *****")
+    return result
+    # print(result)
+    #print("\n***** PROGRAM ENDED *****")
+
+
+if __name__ == "__main__":
+    #inputString = "ggp,p,dpS,S,RSd,d,p,d,pg,g,r,gpdSd,,pg,rrggdpg,pggrs,ggggrgpgp,p,ggdpd,dpS,S,dGRRS,SdSdddpgpdSdpdpggrssrg,g,grpgrrsrsgrsggp,p,dpS,S,"
+    inputString = "Sndpm,g,rnSdnSndpm,pmgmrS,SndpmpmgmrgnnS,SSnSRRSn,,,SRGGRSndGRSnRSndnSndpm,ndpmgmp,pmpdnS,Snndpmp,dmdnsgrsn,snsndpm,,GRS,RSn,Snd,ndp,gmpgmp,,mpd,,dnd,,g,mpdnSndpmpdnSRGR,SndGRSndNRSndnsndpms,,sndpmpdnsGRSN,nSRSndpmgmpdn,,SRGRSndpmpdnSRGRSndpmgmpdnSnSndpmgmpdnS,GRSndn,RSndpd,Sndpmp,ndpdnS,GRSnd,RSndp,S,Sndpmgr,gmpdnS,d,nSRGRSn,SRSndpd,P,dnSGRSn,D,nSRGMGRn,GRSnSGRS,GRSnSRSndn"
+    ragam = "kalyani"
+    print(lexer(inputString, ragam))

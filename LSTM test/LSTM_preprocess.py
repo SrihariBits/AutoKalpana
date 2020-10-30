@@ -49,6 +49,7 @@ tokens = clean_doc(doc)
 print(tokens[:200])
 print('Total Tokens: %d' % len(tokens))
 print('Unique Tokens: %d' % len(set(tokens)))
+print(tokens)
 
 # organize into sequences of tokens
 length = 50 + 1

@@ -2,7 +2,7 @@ import numpy as np
 from Dictionary import dictionary
 
 
-def toNpArray(inputString, raga='mohanam'):
+def toNpArray(inputString, raga):
     toVal = dictionary[raga]
     arr = np.array([])
     for i in range(0, len(inputString)):
