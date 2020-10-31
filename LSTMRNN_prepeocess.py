@@ -34,7 +34,7 @@ if __name__ == "__main__":
                         continue
                     word = word + inv_dictionary[ragam][num]
                 tokens.append(word)
-    length = 6
+    length = 5
     sequences = list()
     for i in range(length, len(tokens)):
         seq = tokens[i-length:i]
