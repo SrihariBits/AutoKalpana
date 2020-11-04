@@ -2,54 +2,60 @@ from random import randint
 from pickle import load
 from keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
+from lexer import lexer
+from random import seed
+from random import randint
+seed(1)
 
 
 def getValue(c):
     notes = ""
     if c == '1':
-        notes = notes + "S"+"\u2193"+"-"
+        notes = notes + "S"+"\u2193"  # +"-"
     elif c == '2':
-        notes = notes + "R"+"\u2193"+"-"
+        notes = notes + "R"+"\u2193"  # +"-"
     elif c == '3':
-        notes = notes + "G"+"\u2193"+"-"
+        notes = notes + "G"+"\u2193"  # +"-"
     elif c == '4':
-        notes = notes + "M"+"\u2193"+"-"
+        notes = notes + "M"+"\u2193"  # +"-"
     elif c == '5':
-        notes = notes + "P"+"\u2193"+"-"
+        notes = notes + "P"+"\u2193"  # +"-"
     elif c == '6':
-        notes = notes + "D"+"\u2193"+"-"
+        notes = notes + "D"+"\u2193"  # +"-"
     elif c == '7':
-        notes = notes + "N"+"\u2193"+"-"
+        notes = notes + "N"+"\u2193"  # +"-"
     elif c == 's':
-        notes = notes + "S"+"-"
+        notes = notes + "S"  # +"-"
     elif c == 'r':
-        notes = notes + "R"+"-"
+        notes = notes + "R"  # +"-"
     elif c == 'g':
-        notes = notes + "G"+"-"
+        notes = notes + "G"  # +"-"
     elif c == 'm':
-        notes = notes + "M"+"-"
+        notes = notes + "M"  # +"-"
     elif c == 'p':
-        notes = notes + "P"+"-"
+        notes = notes + "P"  # +"-"
     elif c == 'd':
-        notes = notes + "D"+"-"
+        notes = notes + "D"  # +"-"
     elif c == 'n':
-        notes = notes + "N"+"-"
+        notes = notes + "N"  # +"-"
     elif c == 'S':
-        notes = notes + "S"+"\u2191"+"-"
+        notes = notes + "S"+"\u2191"  # +"-"
     elif c == 'R':
-        notes = notes + "R"+"\u2191"+"-"
+        notes = notes + "R"+"\u2191"  # +"-"
     elif c == 'G':
-        notes = notes + "G"+"\u2191"+"-"
+        notes = notes + "G"+"\u2191"  # +"-"
     elif c == 'M':
-        notes = notes + "M"+"\u2191"+"-"
+        notes = notes + "M"+"\u2191"  # +"-"
     elif c == 'P':
-        notes = notes + "P"+"\u2191"+"-"
+        notes = notes + "P"+"\u2191"  # +"-"
     elif c == 'D':
-        notes = notes + "D"+"\u2191"+"-"
+        notes = notes + "D"+"\u2191"  # +"-"
     elif c == 'N':
-        notes = notes + "N"+"\u2191"+"-"
+        notes = notes + "N"+"\u2191"  # +"-"
+    elif c == '-':
+        notes = notes + "-"
     elif c == ' ':
-        notes = notes + ","
+        notes = notes + ",-"
     return notes
 
 
@@ -77,6 +83,53 @@ def generate_seq(model, tokenizer, seq_length, seed_text, n_words):
     return ' '.join(result)
 
 
+def postprocessing(generated, raga):
+    # Making it more lively
+    # Random distribution of repetitive notes with commas
+    notes = ""
+    incPitch = []
+    decPitch = []
+    if raga == "kalyani":
+        incPitch = [('r', 'g'), ('R', 'G'), ('m', 'p'), ('M', 'P'),
+                    ('d', 'n'), ('D', 'N'), ('n', 's'), ('N', 'S')]
+        decPitch = [('d', 'p'), ('D', 'P')]
+
+    gen_patterns = generated.split()
+    generated = ""
+    for pat in gen_patterns:
+        temp_str = ""
+        i = 0
+        for c in pat:
+            temp_str += c
+            i += 1
+            if i % 4 == 0:
+                temp_str += '-'
+        generated = generated+" "+temp_str
+
+    for i in range(len(generated)):
+        if i+1 < len(generated) and generated[i+1] == generated[i] and randint(0, 1000) % 3 == 0:
+            notes += ','
+            continue
+        notes = notes + getValue(generated[i])
+        if i+1 < len(generated):
+            if generated[i+1] == generated[i]:
+                notes += '-'
+            if (generated[i], generated[i+1]) in incPitch:
+                notes += '<'
+            if (generated[i], generated[i+1]) in decPitch:
+                notes += '>'
+    '''
+    gen_patterns = generated.split()
+    for pat in gen_patterns:
+        print(pat)
+        print(type(pat))
+        lexer(pat, ragam, True)
+    '''
+    print(generated)
+    print()
+    print(notes)
+
+
 if __name__ == "__main__":
     ragam = 'kalyani'
     doc = load_doc("LSTMRNN_Saved\\"+ragam+'.txt')
@@ -95,9 +148,5 @@ if __name__ == "__main__":
 
     # generate new text
     generated = generate_seq(model, tokenizer, seq_length, seed_text, 100)
-    notes = ""
-    for i in range(len(generated)):
-        notes = notes + getValue(generated[i])
 
-    print(generated)
-    print(notes)
+    postprocessing(generated, ragam)

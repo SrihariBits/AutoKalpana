@@ -295,7 +295,7 @@ def findPartitionPatterns(inputList, raga):
     return retlist
 
 
-def lexer(inputString, raga):
+def lexer(inputString, raga, printPat=False):
     '''
     print("***** PROGRAM STARTED *****\n")
     inputString = "ggp,p,dpS,S,RSd,d,p,d,pg,g,r,gpdSd,,pg,rrggdpg,pggrs,ggggrgpgp,p,ggdpd,dpS,S,dGRRS,SdSdddpgpdSdpdpggrssrg,g,grpgrrsrsgrsggp,p,dpS,S,"
@@ -332,6 +332,22 @@ def lexer(inputString, raga):
                                 top.append(-1)
                                 top.insert(0, -1)
                                 ret_list = [top]
+                                print("6 ")
+                            else:
+                                if printPat:
+                                    print("5 ")
+                        else:
+                            if printPat:
+                                print("4 ")
+                    else:
+                        if printPat:
+                            print("3 ")
+                else:
+                    if printPat:
+                        print("2 ")
+            else:
+                if printPat:
+                    print("1 ")
             ret_list.reverse()
             for l in ret_list:
                 stack.append(l)
