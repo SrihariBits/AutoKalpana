@@ -99,7 +99,7 @@ def constructRagaGraph(ragaName):
             17: [16, 17],
             18: [17, 18, 19],
             19: [18, 19, 20],
-            20: [19, 20, 22],
+            20: [19, 20],
             21: [20, 21]
         }
         distanceMatrix = [
