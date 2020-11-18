@@ -44,6 +44,6 @@ if __name__ == "__main__":
     model.fit(X, y, batch_size=128, epochs=100)
 
     # save the model to file
-    model.save('LSTMRNN.h5')
+    model.save("MODEL_FILES\\" + "LSTMRNN" + ragam+'.h5')
     # save the tokenizer
-    dump(tokenizer, open('LSTMtokenizer.pkl', 'wb'))
+    dump(tokenizer, open("MODEL_FILES\\" + ragam+'LSTMtokenizer.pkl', 'wb'))

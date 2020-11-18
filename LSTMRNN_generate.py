@@ -137,13 +137,13 @@ if __name__ == "__main__":
     seq_length = len(lines[0].split()) - 1
 
     # load the model
-    model = load_model('LSTMRNN.h5')
+    model = load_model("MODEL_FILES\\" + "LSTMRNN" + ragam+'.h5')
 
     # load the tokenizer
-    tokenizer = load(open('LSTMtokenizer.pkl', 'rb'))
+    tokenizer = load(open("MODEL_FILES\\" + ragam+'LSTMtokenizer.pkl', 'rb'))
 
     # select a seed text
-    seed_text = lines[randint(0, len(lines))]
+    seed_text = lines[randint(10, len(lines))]
     print(seed_text + '\n')
 
     # generate new text

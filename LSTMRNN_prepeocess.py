@@ -19,7 +19,7 @@ def save_doc(lines, filename):
 
 
 if __name__ == "__main__":
-    ragam = "thodi"
+    ragam = "kalyani"
     tokens = []
     for filename in os.listdir(os.path.join(os.getcwd(), "Dataset", ragam)):
         with open(os.path.join(os.getcwd(), "Dataset", ragam, filename), 'r') as f:
