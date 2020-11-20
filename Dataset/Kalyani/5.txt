@@ -1,12 +1,1 @@
-gr,,gr,,mg,,mg,,nd,,nd,,gr,nd,GR,gr,ndmgrs
-mg,,nd,,GR,,nd,,mg,,nsn
-nd,nm,dg,mr,gs,GRndmgrsr
-dnmdgmrgsrsGR,nd,mg,rSp,mg,r
-m,mndnmdg,mrgsrs,S,p,pmgmrg,m,
-d,nd,ndndpmp,dnSd,nSR,Snd,GRSndpdn
-S,n,dp,m,gmrg,,
-nnddndpmndpmpdpm
-p,dpndnpdpm,pdpmg,rsrgrsgr,mg,dm,nd,d,m,grg,
-ddnnmmddggmmrrggssrrggmmppddnSnSGRSndpdn
-GRSnd,RSndp,
-dndndGRGSRnGRSndpmgmpn
+gr,,gr,,mg,,mg,,nd,,nd,,gr,nd,GR,gr,ndmgrsmg,,nd,,GR,,nd,,mg,,nSnnd,nm,dg,mr,gs,GRndmgrsrdnmdgmrgsrsGR,nd,mg,rsp,mg,rm,mndnmdg,mrgsrs,S,p,pmgmrg,m,d,nd,ndndpmp,dnSd,nSR,Snd,GRSndpdnS,n,dp,m,gmrg,,nnddndpmndpmpdpmp,dpndnpdpm,pdpmg,rsrgrsgr,mg,dm,nd,d,m,grg,ddnnmmddggmmrrggssrrggmmppddnSnSGRSndpdnGRSnd,RSndp,dndndGRGSRnGRSndpmgmpn

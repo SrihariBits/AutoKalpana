@@ -1,8 +1,1 @@
-dGRndnpd,p,,
-ndmgr,dmgrs,gm,pdnp
-ggdggnggRggGRPGRndGRdnpdn
-n,Sdn,Spdn,Smpdn,Sgm,pdn,S
-nSnRSnSdnSSndpm,pg,gmpm,pnsp,GR,
-S,SnRSnSdnSSndpm
-S,SnRSnRSSn,Sn,Sn,ddndnSdnSdndpm
-SnRSnRSndpm,ndpmg,rn,dG,R
+dGRndnpd,p,,ndmgr,dmgrs,gm,pdnpggdggnggRggGRPGRndGRdnpdnn,Sdn,Spdn,Smpdn,Sgm,pdn,SnSnRSnSdnSSndpm,pg,gmpm,pnSp,GR,S,SnRSnSdnSSndpmS,SnRSnRSSn,Sn,Sn,ddndnSdnSdndpmSnRSnRSndpm,ndpmg,rn,dG,R

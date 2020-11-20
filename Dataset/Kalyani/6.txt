@@ -1,7 +1,1 @@
-np,mgr
-pg,,rdpg,rgprg,
-S,SnRSSndpmpmgrg
-SnRSnSdnSn,dpdnRSSndpmSndpmpmgr
-n,nddnddndmgmndmgmg,dm,nd,nR,MG,RSnRSSndpm
-S,SnRSnSdnSdndpmn,SnnSndpmpn,n,
-SRG,RSnG,RSMG,RSnSnRSGRMG,RSnGRSRSndnRSSndpmmpdnS,S,
+np,mgrpg,,ndpg,rgprg,S,SnRSSndpmpmgrgSnRSnSdnSn,dpdnRSSndpmSndpmpmgrn,nddnddndmgmndmgmg,dm,nd,nR,MG,RSnRSSndpmS,SnRSnSdnSdndpmn,SnnSndpmpn,n,SRG,RSnG,RSMG,RSnSnRSGRMG,RSnGRSRSndnRSSndpmmpdnS,S,

@@ -1,2 +1,1 @@
-gdp,pmgg
-g,,,p,pmg,g,r,g,r,s,
+gdp,pmggg,,,p,pmg,g,r,g,r,s,

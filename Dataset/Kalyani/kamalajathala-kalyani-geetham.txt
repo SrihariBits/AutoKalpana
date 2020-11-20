@@ -1,6 +1,1 @@
-sss|ndns||ndp|dpmp||
-gmp|pddn||dpm|pgrs||
-ddd|ggg,||mp,|mgrs||
-r,,|s,,,||,,,|,,,,||
-gmp|mpdp||ndp|dpmp||
-gmp|pddn||dpm|pgrs||
+SSSndnSndpdpmpgmppddndpmpgrsggg,mp,mgrsr,,s,,,,,,,,,,gmpmpdpndpdpmpgmppddndpmpgrs
