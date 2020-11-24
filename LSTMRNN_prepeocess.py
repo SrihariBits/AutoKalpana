@@ -1,6 +1,7 @@
 import string
 import os
 from lexer import lexer
+from lexer import lexerDP
 from inverseDictionary import inv_dictionary
 
 
@@ -19,14 +20,14 @@ def save_doc(lines, filename):
 
 
 if __name__ == "__main__":
-    ragam = "kalyani"
+    ragam = "saveri"
     tokens = []
     for filename in os.listdir(os.path.join(os.getcwd(), "Dataset", ragam)):
         with open(os.path.join(os.getcwd(), "Dataset", ragam, filename), 'r') as f:
+            print(filename)
             text = f.read()
             text = clean(text)
-            print(text)
-            tokenList = lexer(text, ragam)
+            tokenList = lexerDP(text, ragam)
             for grouping in tokenList:
                 word = ""
                 for num in grouping:
