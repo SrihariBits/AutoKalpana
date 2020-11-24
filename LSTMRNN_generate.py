@@ -3,9 +3,10 @@ from pickle import load
 from keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
 from lexer import lexer
+from lexer import lexerDP
 from random import seed
 from random import randint
-seed(1)
+import re
 
 
 def getValue(c):
@@ -128,6 +129,12 @@ def postprocessing(generated, raga):
     print(generated)
     print()
     print(notes)
+    test_string = generated
+    test_string = re.sub('-', '', test_string)
+    test_string = re.sub(' ', '', test_string)
+    print('BEGIN')
+    lexer(test_string, ragam, True)  # change later
+    print('END')
 
 
 if __name__ == "__main__":
