@@ -1,16 +1,1 @@
-SRG,M,gpmgrmgrSSDNS,,,,snSrgrsSS,SR|GSRG|rgM,RG,,sn||
-SRG,mdpmgpmgrmgrsnD,N,S,,,,snSrgrsSS,SR|GSRG|rgM,RG,,sn||
-D,,,P,,MPMGRGMP,mgRSsrsnRNSD,N,|NPD,|N,snsr,S,sn
-P,,,D,DPP,mM,,,pdndP,M,G,,,gmdpgmpm|pmgrG,|,,M,P,,,||
-P,,,pdnssnndP,mM,,,pdndP,M,dpmg,,,gmdpgmpm|pmgrPgm|G,M,P,rsrgm||
-ppmgM,M,dpmgM,,PP,dmPDNS,SNSRRSSrs|NSsnD|N,PDSNS,||
-SNM,M,dpmgM,,PP,dmPDNS,SNSRRSSrs|NSsnD|N,PDN,S,||
-,SSRRSR,rsS,SrssnDPDNS,S,Ndp,MmgR|S,S,p|,DNsnP,grS||
-,SSRRSrgmgrmgrsnSrsdrsndpDNS,S,Ndp,MmgR|S,S,p|,dnsrsnP,grS||
-,SDPGmpGRS,SGgrpmmgGS,snN,snSrgrsSDN|SNS,|,,GRG,,,||
-pmgpmgrgS,MGGMP,S,SpmmgGrS,S,rG,RGM,|M,GM|MDPMP,,,||
-,mdppmgM,P,,,P,D,DPP,mM,GMP,dmPDN|SNDP|D,N,S,,,||
-,mdppmgM,P,,,P,rsndDPP,mM,GMP,dmPDN|SNDP|D,N,S,,,||
-,SNSNSnsRRSSrsNSDNMPDNS,SrsNsnD,|P,GM|DPMPmgRS,||
-SMGM,PMPDNS,nDPDNS,S,SSRSdrsndndp|
-mpdnS,dr|sndpSsndp,grS||
+SRG,M,GPMGRMGRSSdnS,,,,SnSRGRSSS,SRGSRGRGM,RG,,SnSRG,mdpmgpmgrmgrs,d,n,S,,,,SnSRGRSSS,SRGSRGRGM,RG,,Snd,,,p,,mpmgrgmp,mgrssrs,,rs,,d,n,npd,n,SnSR,S,Snp,,,d,dpp,mm,,,pdndp,m,g,,,gmdpgmpmpmgrg,,,m,p,,,p,,,pdnSSnndp,mm,,,pdndp,m,dpmg,,,gmdpgmpmpmgrpgmg,m,p,rsrgmppmgm,m,dpmgm,,pp,dmpdnS,SnSRRSSRSnSSndn,pdSnS,Snm,m,dpmgm,,pp,dmpdnS,SnSRRSSRSnSSndn,pdn,S,,SSRRSR,RSS,SRSSndpdnS,S,ndp,mmgrs,s,p,dnSnp,GRS,SSRRSRGMGRMGRSnSRSdRSndpdnS,S,ndp,mmgrs,s,p,dnSRSnp,grs,Sdpgmpgrs,sggrpmmggs,ssrgrsSdnSnS,,,GRG,,,PMGPMGRGS,mggmp,S,Spmmggrs,s,rg,rgm,m,gmmdpmp,,,,mdppmgm,p,,,p,d,dpp,mm,gmp,dmpdnSndpd,n,S,,,,mdppmgm,p,,,p,RSnddpp,mm,gmp,dmpdnSndpd,n,S,,,,SnSnSnSRRSSRSnSdnmpdnS,SRSnSnd,p,gmdpmpmgrs,smgm,pmpdnS,ndpdnS,S,SSRSdRSndndpmpdnS,dRSndpSSndp,GRS

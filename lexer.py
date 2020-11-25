@@ -309,7 +309,7 @@ def isConstant(inputList, raga):
     if len(inputList) <= 2:
         return False
     distanceMatrix = constructRagaGraph(raga)
-    for size in range(6, 2, -1):
+    for size in range(20, 2, -1):
         i = 0
         if i <= len(inputList)-2*size:
             subpartA = inputList[i+size:i+2*size]
