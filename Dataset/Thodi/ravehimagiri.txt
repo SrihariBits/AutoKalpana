@@ -1,10 +1,1 @@
-D,,,,,N,,,,NGRSN|DM,D,,DN|SsnDN,SDN||
-S,,,,,,,,,,,NDNS|RG,RSrnS,|,SG,,grRS||
-DNSRGRG,,,,GMGRS|R,,,,,RS|NSD,,S,N||
-MGR,SRSND,,,NSR,|SNSRS,,,|G,R,SGRSN||
-G,MP,,GMN,DMGRSN|G,RS,,RG|S,SRN,NS||
-G,MD,MGMD,,NDMG,|,DMGR,,M|GRN,,GRS||
-GMNDMGMDMGDM,GRS|P,M,GRM,G,|RSRSRGM,||
-GRGMD,MDN,DNSD,D|NDGRN,,D|,,M,G,R,S,||
-D,DN,DNSNDN,G,RN|S,,S,ND,|,NSNDPDM||
-,,P,,D,,N,,S,RG,|,M,DN,,P|,DM,,GRS||
+d,,,,,n,,,,nGRSndm,d,,dnSSndn,SdnS,,,,,,,,,,,ndnSRG,RSRnS,,SG,,GRRSdnSRGRG,,,,GMGRSR,,,,,RSnSd,,S,nmgr,sRSnd,,,nSR,SnSRS,,,G,R,SGRSnG,MP,,GMn,DMGRSnG,RS,,RGS,SRn,nSG,MD,mgmd,,ndmg,,dmgr,,mgrgrsgmndmgmdmgdm,grsp,m,grm,g,rsrsrgm,grgmd,mdn,dnSd,dndGRn,,d,,m,g,r,s,d,dn,dnSndn,G,RnS,,S,nd,,nSndpdm,,p,,d,,n,,S,RG,,m,dn,,p,dm,,grs
