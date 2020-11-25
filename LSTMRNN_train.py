@@ -4,6 +4,7 @@ from keras.preprocessing.text import Tokenizer
 from keras.utils import to_categorical
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.layers import Embedding
 
@@ -32,16 +33,15 @@ if __name__ == "__main__":
 
     model = Sequential()
     model.add(Embedding(vocab_size, 50, input_length=seq_length))
-    model.add(LSTM(100, return_sequences=True))
-    model.add(LSTM(100))
-    model.add(Dense(100, activation='relu'))
+    model.add(LSTM(512, return_sequences=True))
+    model.add(Dropout(0.3))
+    model.add(LSTM(256))
+    model.add(Dense(256, activation='relu'))
     model.add(Dense(vocab_size, activation='softmax'))
-    print(model.summary())
-
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam', metrics=['accuracy'])
     # fit model
-    model.fit(X, y, batch_size=128, epochs=100)
+    model.fit(X, y, batch_size=64, epochs=100)
 
     # save the model to file
     model.save("MODEL_FILES\\" + "LSTMRNN" + ragam+'.h5')

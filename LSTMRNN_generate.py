@@ -91,9 +91,23 @@ def postprocessing(generated, raga):
     incPitch = []
     decPitch = []
     if raga == "kalyani":
-        incPitch = [('r', 'g'), ('R', 'G'), ('m', 'p'), ('M', 'P'),
-                    ('d', 'n'), ('D', 'N'), ('n', 's'), ('N', 'S')]
-        decPitch = [('d', 'p'), ('D', 'P')]
+        incPitch = {('r', 'g'): '((,,RG))-', ('R', 'G'): '((,,R↑G↑))-', ('m', 'p'): '((,,MP))-', ('M', 'P'): '((,,M↑P↑))-',
+                    ('d', 'n'): '((,,DN))-', ('D', 'N'): '((,,D↑N↑))-', ('n', 's'): '((,,NS))-', ('N', 'S'): '((,,N↑S↑))-'}
+        decPitch = {('d', 'p'): '((,,DP))-', ('D', 'P'): '((,,D↑P↑))-'}
+    elif raga == "panthuvarali":
+        incPitch = {('m', 'p'): '((,,MP))-', ('M', 'P'): '((,,M↑P↑))-',
+                    ('n', 's'): '((,,NS))-', ('N', 'S'): '((,,N↑S↑))-'}
+        decPitch = {('d', 'p'): '((,,DP))-', ('D', 'P'): '((,,D↑P↑))-'}
+    elif raga == "saveri":
+        incPitch = {('m', 'p'): '((,,MP))-', ('M', 'P'): '((,,M↑P↑))-'}
+        decPitch = {('d', 'p'): '((,,DP))-', ('D', 'P'): '((,,D↑P↑))-'}
+    elif raga == "shankarabharanam":
+        incPitch = {('r', 'g'): '((,,RG))-', ('R', 'G'): '((,,R↑G↑))-',
+                    ('d', 'n'): '((,,DN))-', ('D', 'N'): '((,,D↑N↑))-'}
+        decPitch = {}
+    elif raga == "thodi":
+        incPitch = {('n', 's'): '((,,NS))-', ('N', 'S'): '((,,N↑S↑))-'}
+        decPitch = {}
 
     gen_patterns = generated.split()
     generated = ""
@@ -108,17 +122,21 @@ def postprocessing(generated, raga):
         generated = generated+" "+temp_str
 
     for i in range(len(generated)):
-        if i+1 < len(generated) and generated[i+1] == generated[i] and randint(0, 1000) % 3 == 0:
+        while i+1 < len(generated) and generated[i+1] == generated[i] and randint(0, 1000) % 4 == 0:
             notes += ','
+            if randint(0, 1000) % 3 == 0:
+                notes + ','
             continue
         notes = notes + getValue(generated[i])
         if i+1 < len(generated):
             if generated[i+1] == generated[i]:
                 notes += '-'
+            '''
             if (generated[i], generated[i+1]) in incPitch:
-                notes += '<'
+                notes += incPitch[(generated[i], generated[i+1])]
             if (generated[i], generated[i+1]) in decPitch:
-                notes += '>'
+                notes += decPitch[(generated[i], generated[i+1])]
+            '''
     '''
     gen_patterns = generated.split()
     for pat in gen_patterns:
