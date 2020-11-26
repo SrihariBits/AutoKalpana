@@ -17,7 +17,7 @@ def load_doc(filename):
 
 
 if __name__ == "__main__":
-    ragam = 'kalyani'
+    ragam = 'thodi'
     doc = load_doc("LSTMRNN_Saved\\"+ragam+'.txt')
     lines = doc.split('\n')
 
@@ -34,14 +34,14 @@ if __name__ == "__main__":
     model = Sequential()
     model.add(Embedding(vocab_size, 50, input_length=seq_length))
     model.add(LSTM(512, return_sequences=True))
-    model.add(Dropout(0.3))
+    model.add(Dropout(0.4))
     model.add(LSTM(256))
     model.add(Dense(256, activation='relu'))
     model.add(Dense(vocab_size, activation='softmax'))
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam', metrics=['accuracy'])
     # fit model
-    model.fit(X, y, batch_size=64, epochs=100)
+    model.fit(X, y, batch_size=64, epochs=30)
 
     # save the model to file
     model.save("MODEL_FILES\\" + "LSTMRNN" + ragam+'.h5')

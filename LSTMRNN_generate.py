@@ -122,21 +122,20 @@ def postprocessing(generated, raga):
         generated = generated+" "+temp_str
 
     for i in range(len(generated)):
-        while i+1 < len(generated) and generated[i+1] == generated[i] and randint(0, 1000) % 4 == 0:
+        while i+1 < len(generated) and generated[i+1] == generated[i] and randint(0, 1000) % 3 == 0:
             notes += ','
-            if randint(0, 1000) % 3 == 0:
+            while randint(0, 1000) % 4 == 0:
                 notes + ','
             continue
         notes = notes + getValue(generated[i])
         if i+1 < len(generated):
             if generated[i+1] == generated[i]:
                 notes += '-'
-            '''
             if (generated[i], generated[i+1]) in incPitch:
                 notes += incPitch[(generated[i], generated[i+1])]
             if (generated[i], generated[i+1]) in decPitch:
                 notes += decPitch[(generated[i], generated[i+1])]
-            '''
+
     '''
     gen_patterns = generated.split()
     for pat in gen_patterns:
@@ -156,7 +155,7 @@ def postprocessing(generated, raga):
 
 
 if __name__ == "__main__":
-    ragam = 'kalyani'
+    ragam = 'thodi'
     doc = load_doc("LSTMRNN_Saved\\"+ragam+'.txt')
     lines = doc.split('\n')
     seq_length = len(lines[0].split()) - 1
